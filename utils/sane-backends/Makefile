@@ -9,17 +9,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=sane-backends
-PKG_VERSION:=1.0.29
-PKG_RELEASE:=1
+PKG_VERSION:=1.0.30
+PKG_RELEASE:=2
+
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://gitlab.com/sane-project/backends/uploads/54f858b20a364fc35d820df935a86478
-PKG_HASH:=aa027b4e5f59849cd41b8c26d54584cf31fffd986049019be6ad4140e11ea8ed
+PKG_SOURCE_URL:=https://gitlab.com/sane-project/backends/uploads/c3dd60c9e054b5dee1e7b01a7edc98b0
+PKG_HASH:=3f5d96a9c47f6124a46bb577c776bbc4896dd17b9203d8bfbc7fe8cbbcf279a3
+
 PKG_MAINTAINER:=Luiz Angelo Daros de Luca <luizluca@gmail.com>
 PKG_LICENSE:=GPL-2.0 GPL-2.0-or-later
 PKG_LICENSE_FILES:=COPYING LICENSE
 PKG_CPE_ID:=cpe:/a:sane-backends_project:sane-backends
 
 PKG_INSTALL:=1
+PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -170,7 +173,7 @@ $(call Package/sane-backends/Default/description)
 This package contains the SANE frontends.
 endef
 
-CONFIGURE_ARGS+= \
+CONFIGURE_ARGS += \
 	--enable-shared \
 	--enable-static \
 	--disable-preload \
@@ -180,8 +183,8 @@ CONFIGURE_ARGS+= \
 	--without-usb-record-replay \
 
 # ./configure does not even try to detect mmap if crosscompiling
-CONFIGURE_VARS+= \
-    ac_cv_func_mmap_fixed_mapped="yes" \
+CONFIGURE_VARS += \
+    ac_cv_func_mmap_fixed_mapped="yes"
 
 define Build/Configure
 	mkdir -p $(PKG_BUILD_DIR)/backend/.libs
@@ -287,7 +290,7 @@ This package contains the SANE backend for $(2).
   endef
 
   define Package/sane-$(1)/conffiles
-	/etc/sane.d/$(1).conf
+/etc/sane.d/$(1).conf
   endef
 
   $$(eval $$(call BuildPackage,sane-$(1)))

@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-pytz
-PKG_VERSION:=2019.3
+PKG_VERSION:=2020.1
 PKG_RELEASE:=1
 
 PYPI_NAME:=pytz
-PKG_HASH:=b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be
+PKG_HASH:=c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=MIT
@@ -22,24 +22,17 @@ include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include ../python3-package.mk
 
-define Package/python-pytz/Default
+define Package/python3-pytz
   SUBMENU:=Python
   SECTION:=lang
   CATEGORY:=Languages
+  TITLE:=World timezone definitions, modern and historical
   URL:=https://pythonhosted.org/pytz/
-endef
-
-define Package/python3-pytz
-$(call Package/python-pytz/Default)
-  TITLE:=World timezone definitions, modern and historical for Python3
-  DEPENDS:=+PACKAGE_python3-pytz:python3-light
-  VARIANT:=python3
+  DEPENDS:=+python3-light
 endef
 
 define Package/python3-pytz/description
   World timezone definitions, modern and historical
-.
-(Variant for Python3)
 endef
 
 $(eval $(call Py3Package,python3-pytz))

@@ -5,13 +5,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dawn
-PKG_SOURCE_DATE:=2020-04-10
+PKG_SOURCE_DATE:=2020-08-26
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/berlin-open-wireless-lab/DAWN.git
-PKG_SOURCE_VERSION:=5709b96a4dc156ffc8e846360c6d3ecc6584605b
-PKG_MIRROR_HASH:=c1d080eb8ae1d9ee07ebcf91e0a1e7c731875b142ebf838a75043c197fec4c37
+PKG_SOURCE_VERSION:=c2c0009d613a59e282c9ee429928bf1b7edea025
+PKG_MIRROR_HASH:=620059cad972ab0c6dc313995bf059dc0f470eeb1eae2d1f3b4d1bac34a21d36
 
 PKG_MAINTAINER:=Nick Hainke <vincent@systemli.org>
 PKG_LICENSE:=GPL-2.0-only
@@ -32,6 +32,10 @@ endef
 
 define Package/dawn/description
   This package implements a decentralized wireless daemon.
+endef
+
+define Package/dawn/conffiles
+/etc/config/dawn
 endef
 
 define Package/dawn/install

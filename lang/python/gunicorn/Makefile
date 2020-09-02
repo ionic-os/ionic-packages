@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gunicorn
 PKG_VERSION:=20.0.4
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PYPI_NAME:=$(PKG_NAME)
 PKG_HASH:=1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626
@@ -34,13 +34,10 @@ define Package/python3-gunicorn
 $(call Package/gunicorn/Default)
   TITLE:=WSGI HTTP Server for UNIX (library)
   DEPENDS:=+python3
-  VARIANT:=python3
 endef
 
 define Package/python3-gunicorn/description
     WSGI HTTP Server for UNIX (libraries)
-.
-(Variant for Python3)
 endef
 
 # Make sure that the binaries are not installed with the libraries
@@ -56,8 +53,6 @@ endef
 
 define Package/gunicorn3/description
     WSGI HTTP Server for UNIX (daemon)
-.
-(Variant for Python3)
 endef
 
 define Package/gunicorn3/install
@@ -66,7 +61,7 @@ define Package/gunicorn3/install
 		$(PKG_INSTALL_DIR)/usr/bin/gunicorn \
 		$(1)/usr/bin/gunicorn3
 	$(LN) gunicorn3 $(1)/usr/bin/gunicorn
-	$(call Py3Shebang,$(1)/usr/bin/*)
+	$(call Python3/FixShebang,$(1)/usr/bin/*)
 endef
 
 $(eval $(call Py3Package,python3-gunicorn))
